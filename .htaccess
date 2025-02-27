@@ -1,0 +1,111 @@
+# BEGIN WordPress
+# The directives (lines) between "BEGIN WordPress" and "END WordPress" are
+# dynamically generated, and should only be modified via WordPress filters.
+# Any changes to the directives between these markers will be overwritten.
+# <IfModule mod_rewrite.c>
+# RewriteEngine On
+# RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
+# RewriteBase /blogs/
+# RewriteRule ^index\.php$ - [L]
+# RewriteCond %{REQUEST_FILENAME} !-f
+# RewriteCond %{REQUEST_FILENAME} !-d
+# RewriteRule . /blogs/index.php [L]
+<IfModule mod_rewrite.c>
+  RewriteEngine On
+  RewriteBase /
+   # Handle access to blog-admin/blogadmin
+#   RewriteCond %{REQUEST_URI} ^/blog-admin/blogadmin
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule ^blog-admin/blogadmin/(.*)$ /blog-admin/blogadmin/$1 [L]
+
+# Redirect non-www to www
+  RewriteCond %{HTTP_HOST} ^vitabae\.com [NC]
+  RewriteRule ^(.*)$ https://www.vitabae.com/$1 [L,R=301]
+  
+RewriteRule ^sitemap\.xml$ index.php/sitemap [L]
+
+# RewriteCond %{REQUEST_URI} ^/admin-joomla
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule ^admin-joomla/(.*)$ /admin-joomla/$1 [L]
+   
+
+  
+#   RewriteRule ^(.*) public/$1 [L]
+   
+                            RewriteCond %{HTTPS} !=on
+                            RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+                            RewriteRule ^ %1 [L,NE,R=302]
+                            RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+                            
+                            RewriteCond %{REQUEST_URI} ^/blogss
+  RewriteCond %{REQUEST_FILENAME} !-f
+  RewriteCond %{REQUEST_FILENAME} !-d
+  RewriteRule ^blogs/(.*)$ /blogs/index/$1 [L] 
+                            
+                            RewriteCond %{REQUEST_URI} ^/personal-nutrition-guide
+                            RewriteCond %{REQUEST_FILENAME} !-f
+                            RewriteCond %{REQUEST_FILENAME} !-d
+                            RewriteRule ^nutrients/(.*)$ /personal-nutrition-guide/$1 [L]
+                            
+                            
+                            RewriteRule ^(.*) public/$1 [L]
+                            
+                            # RewriteCond %{HTTPS} !=on
+                            # RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+                            # RewriteRule ^ %1 [L,NE,R=302]
+                            # RewriteRule ^((?!public/).*)$ public/$1 [L,NC]
+
+
+
+  # Rewrite rules for Angular app
+  #RewriteCond %{REQUEST_URI} !^/blogs
+  #RewriteCond %{REQUEST_FILENAME} !-f
+  #RewriteCond %{REQUEST_FILENAME} !-d
+  #RewriteRule ^(.*)$ /public/index.php [L]
+ 
+ 
+  # Rewrite rules for PHP blog admin
+#   RewriteCond %{REQUEST_URI} ^/blog-admin
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule ^blog-admin/(.*)$ /blog-admin/blogadmin/$1 [L]
+
+ # Rewrite rules for joomla blog admin
+#   RewriteCond %{REQUEST_URI} ^/admin-joomla
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule ^admin-joomla/(.*)$ /admin-joomla/$1 [L]
+
+ 
+#   # Rewrite rules for WordPress blog
+#   RewriteCond %{REQUEST_URI} ^/blogs-wp
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule ^blogs-wp/(.*)$ /blogs-wp/$1 [L]
+
+  # Rewrite rules for blog
+  #RewriteCond %{REQUEST_URI} ^/blogs
+  #RewriteCond %{REQUEST_FILENAME} !-f
+  #RewriteCond %{REQUEST_FILENAME} !-d
+  #RewriteRule ^blogs/(.*)$ /blogs/public/$1 [L]
+  # Handle blog URLs
+  
+
+  # Redirect to public folder
+  #RewriteRule ^(.*) public/$1 [L]
+
+  # Redirect to HTTPS if not already on HTTPS
+ # RewriteCond %{HTTPS} !=on
+#  RewriteCond %{THE_REQUEST} /public/([^\s?]*) [NC]
+#  RewriteRule ^ %1 [L,NE,R=302]
+  
+  # Handle WordPress pretty URLs
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule ^blogs-wp/index\.php$ - [L]
+#   RewriteCond %{REQUEST_FILENAME} !-f
+#   RewriteCond %{REQUEST_FILENAME} !-d
+#   RewriteRule . /blogs-wp/index.php [L]
+</IfModule>
